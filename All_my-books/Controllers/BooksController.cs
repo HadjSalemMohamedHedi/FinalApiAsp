@@ -26,6 +26,16 @@ namespace All_my_books.Controllers
             return Ok("Book Added With Success ! ");
         }
 
+
+        [HttpPost("AddBookWithAuthors")]
+        public IActionResult AddBookWithAuthors([FromBody] BookVM book)
+        {
+            _bookService.AddBookWithAuthors(book);
+            return Ok("Book Added With Success ! ");
+        }
+
+
+
         [HttpGet("GetAllBooks")]
         public IActionResult GetAllBooks()
         {
@@ -43,6 +53,21 @@ namespace All_my_books.Controllers
             return Ok(_book);
         }
 
+
+        
+
+        [HttpGet("GetBookWithAuthorsById/{IdBooktoGet}")]
+        public IActionResult GetBookWithAuthorsById([FromRoute] int IdBooktoGet)
+        {
+            var _book = _bookService.GetBookWithAuthorsById(IdBooktoGet);
+            if (_book == null)
+            {
+                return NotFound("Book Not Existe !!! ");
+            }
+            return Ok(_book);
+        }
+
+        
 
         [HttpPut("Updateook/{IdBooktoUpdate}")]
         public IActionResult Updateook([FromRoute]int IdBooktoUpdate, [FromBody] BookVM book)

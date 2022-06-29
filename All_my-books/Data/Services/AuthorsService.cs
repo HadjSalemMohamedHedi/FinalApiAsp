@@ -1,5 +1,6 @@
 ﻿using All_my_books.Data.Models;
 using All_my_books.Data.ViewModels;
+using System.Linq;
 
 namespace All_my_books.Data.Services
 {
@@ -26,6 +27,15 @@ namespace All_my_books.Data.Services
         }
 
 
+        public AuthorWithBooksVM GetAuthorswithBookds(int authorId)
+        {
+            var _author = _context.Authors.Where(a => a.Id == authorId).Select(n => new AuthorWithBooksVM()
+            {
+                FullName = n.FullName,
+                BookTitles = n.book_Authors.Select(n => n.Book.Title).ToList()
+            }).FirstOrDefault();
+            return _author;
+        }
 
     }
 }
