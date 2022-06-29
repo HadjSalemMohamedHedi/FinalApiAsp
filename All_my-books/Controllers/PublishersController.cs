@@ -23,5 +23,11 @@ namespace All_my_books.Controllers
             return Ok("Publisher Added with success !!! ");
         }
 
+        [HttpGet("GetPublisherData/{authorId}")]
+        public IActionResult GetPublisherData([FromRoute] int authorId)
+        {
+            var response = _publisherService.GetPublisherData(authorId);
+            return Ok(response);
+        }
     }
 }
