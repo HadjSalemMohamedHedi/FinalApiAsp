@@ -1,7 +1,10 @@
+using All_my_books.Data;
+using All_my_books.Data.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -16,9 +19,11 @@ namespace All_my_books
 {
     public class Startup
     {
+        public string ConnectionString { get; set; }
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            ConnectionString = Configuration.GetConnectionString("DefaultConnectionString");
         }
 
         public IConfiguration Configuration { get; }
@@ -28,6 +33,15 @@ namespace All_my_books
         {
 
             services.AddControllers();
+
+            //Configuration DbContext
+            services.AddDbContext<AppDbContext>(
+                options => options.UseSqlServer(ConnectionString)
+            );
+
+            //Add All Services
+            services.AddTransient<BooksService>();
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "All_my_books", Version = "v1" });
