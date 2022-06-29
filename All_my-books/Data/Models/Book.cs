@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.JsonPatch;
+using System;
 using System.Collections.Generic;
 
 namespace All_my_books.Data.Models
@@ -30,6 +31,6 @@ namespace All_my_books.Data.Models
         //Many to Many
         public List<Book_Author> book_Authors { get; set; }
 
-
+       }
     }
-}
+

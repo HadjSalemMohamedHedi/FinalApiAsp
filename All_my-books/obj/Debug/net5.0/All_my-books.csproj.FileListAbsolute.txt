@@ -58,3 +58,12 @@ C:\Users\Mohamed_Hedi\source\repos\All_my-books\All_my-books\obj\Debug\net5.0\re
 C:\Users\Mohamed_Hedi\source\repos\All_my-books\All_my-books\obj\Debug\net5.0\All_my-books.pdb
 C:\Users\Mohamed_Hedi\source\repos\All_my-books\All_my-books\obj\Debug\net5.0\All_my-books.genruntimeconfig.cache
 C:\Users\Mohamed_Hedi\source\repos\All_my-books\All_my-books\obj\Debug\net5.0\ref\All_my-books.dll
+C:\Users\Mohamed_Hedi\source\repos\All_my-books\All_my-books\bin\Debug\net5.0\Microsoft.AspNetCore.JsonPatch.dll
+C:\Users\Mohamed_Hedi\source\repos\All_my-books\All_my-books\bin\Debug\net5.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+C:\Users\Mohamed_Hedi\source\repos\All_my-books\All_my-books\bin\Debug\net5.0\Newtonsoft.Json.Bson.dll
+C:\Users\Mohamed_Hedi\source\repos\All_my-books\All_my-books\bin\Debug\net5.0\Microsoft.AspNetCore.Cryptography.Internal.dll
+C:\Users\Mohamed_Hedi\source\repos\All_my-books\All_my-books\bin\Debug\net5.0\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+C:\Users\Mohamed_Hedi\source\repos\All_my-books\All_my-books\bin\Debug\net5.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+C:\Users\Mohamed_Hedi\source\repos\All_my-books\All_my-books\bin\Debug\net5.0\Microsoft.Extensions.Identity.Core.dll
+C:\Users\Mohamed_Hedi\source\repos\All_my-books\All_my-books\bin\Debug\net5.0\Microsoft.Extensions.Identity.Stores.dll
+C:\Users\Mohamed_Hedi\source\repos\All_my-books\All_my-books\bin\Debug\net5.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll

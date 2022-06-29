@@ -1,16 +1,17 @@
 ﻿using All_my_books.Data.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace All_my_books.Data
 {
-    public class AppDbContext:DbContext
+    public class AppDbContext: IdentityDbContext<ApplicationUser>
     {
         public AppDbContext(DbContextOptions<AppDbContext> options):base(options)
         {
                 
         }
 
-
+        /*
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Book_Author>()
@@ -26,7 +27,7 @@ namespace All_my_books.Data
 
 
         }
-
+        */
         public DbSet<Book> Books { get; set; }
         public DbSet<Publisher> Publishers { get; set; }
         public DbSet<Author> Authors { get; set; }

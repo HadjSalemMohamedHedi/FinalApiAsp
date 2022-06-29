@@ -1,5 +1,6 @@
 ﻿using All_my_books.Data.Models;
 using All_my_books.Data.ViewModels;
+using Microsoft.AspNetCore.JsonPatch;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -115,6 +116,29 @@ namespace All_my_books.Data.Services
             return bookToUpdate;
 
         }
+
+
+
+
+
+        public Book UpdateBookPatch(int bookId, JsonPatchDocument bookModel)
+        {
+            var book = _context.Books.Find(bookId);
+            if (book != null)
+            {
+                bookModel.ApplyTo(bookModel);
+            _context.SaveChanges();
+            }
+
+            return book;
+
+        }
+
+
+     
+
+
+
 
 
         public int DeleteBook(int idBookToDelete)

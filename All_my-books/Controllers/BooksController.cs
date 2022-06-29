@@ -1,6 +1,8 @@
 ﻿using All_my_books.Data.Services;
 using All_my_books.Data.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -8,6 +10,8 @@ namespace All_my_books.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+   
+
     public class BooksController : ControllerBase
     {
 
@@ -79,8 +83,22 @@ namespace All_my_books.Controllers
             }
             return Ok("Book Updated With Success ! ");
         }
-    
-        
+
+
+
+        [HttpPatch("UpdateBookPatch/{IdBooktoUpdate}")]
+        public IActionResult UpdateBookPatch([FromRoute] int IdBooktoUpdate, [FromBody] JsonPatchDocument book)
+        {
+            var _book = _bookService.UpdateBookPatch(IdBooktoUpdate, book);
+            if (_book == null)
+            {
+                NotFound("Book Not Found");
+            }
+            return Ok("Book Updated With Success ! ");
+        }
+
+
+
         [HttpDelete("DeleteBook/{idBookToDelete}")]
         public IActionResult DeleteBook([FromRoute] int idBookToDelete)
         {

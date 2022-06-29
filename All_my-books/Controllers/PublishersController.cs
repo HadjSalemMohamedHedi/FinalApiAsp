@@ -23,11 +23,20 @@ namespace All_my_books.Controllers
             return Ok("Publisher Added with success !!! ");
         }
 
-        [HttpGet("GetPublisherData/{authorId}")]
-        public IActionResult GetPublisherData([FromRoute] int authorId)
+        [HttpGet("GetPublisherData/{PublisherId}")]
+        public IActionResult GetPublisherData([FromRoute] int PublisherId)
         {
-            var response = _publisherService.GetPublisherData(authorId);
+            var response = _publisherService.GetPublisherData(PublisherId);
             return Ok(response);
         }
+
+
+        [HttpDelete("Delete-PubisherById/{PublisherId}")]
+        public IActionResult DeletePublisherById([FromRoute]int PublisherId)
+        {
+             _publisherService.DeletePublisherById(PublisherId);
+            return Ok();
+        }
+
     }
 }
