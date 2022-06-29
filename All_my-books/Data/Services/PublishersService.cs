@@ -3,25 +3,25 @@ using All_my_books.Data.ViewModels;
 
 namespace All_my_books.Data.Services
 {
-    public class AuthorsService
+    public class PublishersService
     {
 
         private readonly AppDbContext _context;
 
-        public AuthorsService(AppDbContext Context)
+        public PublishersService(AppDbContext Context)
         {
             _context = Context;
         }
 
 
-        public void AddAuthor(AuthorVM author)
+        public void AddPublisher(PublisherVM publisher)
         {
-            var _Author = new Author()
+            var _Publisher = new Publisher()
             {
-                FullName = author.FullName,
+                Name = publisher.Name,
             
             };
-            _context.Authors.Add(_Author);
+            _context.Publishers.Add(_Publisher);
             _context.SaveChanges();
         }
 
