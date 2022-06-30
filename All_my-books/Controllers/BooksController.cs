@@ -10,8 +10,7 @@ namespace All_my_books.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-   
-
+    [Authorize]
     public class BooksController : ControllerBase
     {
 

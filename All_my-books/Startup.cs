@@ -37,39 +37,28 @@ namespace All_my_books
         public void ConfigureServices(IServiceCollection services)
         {
 
-
-
-
-            services.AddIdentity<ApplicationUser, IdentityRole>()
-                .AddEntityFrameworkStores<AppDbContext>()
-                .AddDefaultTokenProviders();
-
-            services.AddControllers();
-
-
             //Configuration DbContext
             services.AddDbContext<AppDbContext>(
                 options => options.UseSqlServer(ConnectionString)
             );
 
-            //Add All Services
-            services.AddTransient<BooksService>();
-            services.AddTransient<PublishersService>();
-            services.AddTransient<AuthorsService>();
-            services.AddTransient<IAccountRepository,AccountRepository>();
+            //Add identity
+            services.AddIdentity<ApplicationUser, IdentityRole>()
+                .AddEntityFrameworkStores<AppDbContext>()
+                .AddDefaultTokenProviders();
 
 
-
-            //JWT BEARER
-            services.AddAuthentication(options =>
+            services.AddAuthentication(option =>
             {
-                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-                options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-            }).AddJwtBearer(options => {
-                options.SaveToken = true;
-                options.RequireHttpsMetadata = false;
-                options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters()
+                option.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                option.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                option.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(option =>
+            {
+                option.SaveToken = true;
+                option.RequireHttpsMetadata = false;
+                option.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters()
                 {
                     ValidateIssuer = true,
                     ValidateAudience = true,
@@ -77,8 +66,29 @@ namespace All_my_books
                     ValidIssuer = Configuration["JWT:ValidIssuer"],
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JWT:Secret"]))
                 };
-
             });
+
+            services.AddControllers().AddNewtonsoftJson();
+
+
+
+
+      
+
+            //Add All Services
+            services.AddTransient<BooksService>();
+            services.AddTransient<PublishersService>();
+            services.AddTransient<AuthorsService>();
+            services.AddTransient<IAccountRepository,AccountRepository>();
+
+            services.AddCors(option =>
+            {
+                option.AddDefaultPolicy(builder =>
+                {
+                    builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
+                });
+            });
+
 
 
             //JsonPatch
@@ -103,9 +113,9 @@ namespace All_my_books
             app.UseHttpsRedirection();
 
             app.UseRouting();
-
-            app.UseAuthorization();
+            app.UseCors();
             app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
